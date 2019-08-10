@@ -5,4 +5,3 @@ for _ in range(int(input())):
         print(word[0] + str(word_length - 2) + word[-1])
     else:
         print(word)
-
