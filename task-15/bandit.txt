@@ -1,0 +1,11 @@
+0. boJ9jbbUNNfktd78OOpsqOltutMc3MY1: got password readme file, use cat readme
+1. CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9: cat ./-
+2. UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK: cat spaces\ in\ this\ filename
+3. pIwrPrtPN36QITSp3EQaw936yaFoFgAB: cd inhere, cat ./.hidden
+4. koReBOKuIDDepwhWk7jZC0RTdopnAYKh: file ./-file0X will return 'data' except for -file07. cat it to get the password
+5. DXjZPULLxYr17uwoI01bNLQbtFemEgo7: cd inhere, find -size 1033c, cat the result
+6. HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs: cd /, ls -l `find -size 33c`, see the files with "bandit7 bandit6" and cat it, cat ./var/lib/dpkg/info/bandit7.password
+7. cvX2JJa4CFALtqS87jk27qwqGhBM9plV: cat data.txt | grep millionth
+8. UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR: sort data.txt | uniq -u
+9. truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk: strings data.txt | egrep "^=+"
+10. IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR: base64 -d data.txt

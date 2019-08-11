@@ -1,0 +1,75 @@
+<html>
+    <body>
+        <div>
+            Enter GitHub username:
+            <input type="text" id="usernameInput" placeholder="username" autofocus>
+            <button type="button" onclick="getData()">Submit</button>
+        </div>
+        <div id="error"></div>
+        <div id="username"></div>
+        <div id="name"></div>
+        <div id="avatarLabel"></div>
+        <img id="avatar" height="0" width="0" style="padding:100px 100px 100px 100px;">
+        <div id="bio"></div>
+        <div id="identiconLabel"></div>
+        <img id="identicon" height="0" width="0" style="padding:100px 100px 100px 100px;">
+        <script>
+            function getData() {
+                var results = ["username", "name", "avatarLabel", "avatar", "bio", "identicon"]
+                var login = document.getElementById("usernameInput").value;
+                var query = `query User($login: String!) {
+                                user(login: $login) {
+                                    login
+                                    name
+                                    avatarUrl
+                                    bio
+                                }
+                            }`
+                fetch('https://api.github.com/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'bearer f860b536e85ac4b5d080023441e806fbcbb6b2ef',
+                    },
+                    body: JSON.stringify({
+                        query,
+                        variables: { login },
+                    })
+                })
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.data.user==null) {
+                            document.getElementById("error").innerHTML = data.errors[0].message;
+                            document.getElementById("error").style.visibility = "visible";
+                            for (var result of results) {
+                                document.getElementById(result).style.visibility = "hidden";
+                            }
+                        } else {
+                            document.getElementById("error").style.visibility = "hidden";
+                            for (var result of results) {
+                                document.getElementById(result).style.visibility = "visible";
+                            }
+                            document.getElementById("username").innerHTML = "Username: " + data.data.user.login;
+                            document.getElementById("name").innerHTML = "Name: " + data.data.user.name;
+                            document.getElementById("avatarLabel").innerHTML = "Avatar:";
+                            document.getElementById("avatar").src = data.data.user.avatarUrl;
+                            document.getElementById("avatar").height = 200;
+                            document.getElementById("avatar").width = 200;
+                            document.getElementById("avatar").style = "padding:0px 0px 0px 0px;"
+                            document.getElementById("bio").innerHTML = "Bio: " + data.data.user.bio;
+                            document.getElementById("identiconLabel").innerHTML = "Identicon:";
+                            document.getElementById("identicon").src = "https://github.com/identicons/" + data.data.user.login + ".png";
+                            document.getElementById("identicon").height = 200;
+                            document.getElementById("identicon").width = 200;
+                            document.getElementById("identicon").style = "padding:0px 0px 0px 0px;"
+                        }
+                    }
+                    )
+                    .catch(function(err){
+                        console.log('Error ', err);
+                    });
+            }
+        </script>
+    </body>
+</html>
