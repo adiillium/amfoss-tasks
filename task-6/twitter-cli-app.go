@@ -10,7 +10,7 @@ import (
 
 func main() {
 	handlePtr := flag.String("handle", "TwitterAPI", "Twitter handle")
-	api_client := anaconda.NewTwitterApiWithCredentials("<your token>", "<your token>", "<your token>", "<your token>")
+	api_client := anacondaNewTwitterApiWithCredentials("your-access-token", "your-access-token-secret", "your-consumer-key", "your-consumer-secret")
 	var user anaconda.User
 	user, _ = api_client.GetUsersShow(*handlePtr, nil)
 	userJSON, _ := json.MarshalIndent(user, "", " ")
